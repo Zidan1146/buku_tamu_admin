@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
-class CreateAdmin extends \App\Http\Controllers\Controller
+class CreateAdmin extends Controller
 {
     public function __invoke(Request $request) {
         try {
@@ -21,8 +23,17 @@ class CreateAdmin extends \App\Http\Controllers\Controller
 
             return redirect('login');
         } catch (\Throwable $th) {
-            throw $th;
-            // return back()->with('error', $th->getMessage());
+            $errorMessage = "
+                {$th->getMessage()}\n
+                On File: {$th->getFile()}\n
+                At Line: {$th->getLine()}\n
+                Stack Trace:\n
+                {$th->getTraceAsString()}";
+
+            Log::error($errorMessage);
+
+            // Please show this error in the frontend
+            return back()->with('error', $th->getMessage());
         }
     }
 }

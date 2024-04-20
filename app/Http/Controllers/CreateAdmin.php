@@ -19,6 +19,6 @@ class CreateAdmin extends Controller
 
         if(Admin::count() > 0) $existingAdmin = Admin::first();
 
-        return view('create-admin', compact('existingAdmin', 'newUsername', 'newPassword'));
+        return view('login.create-admin', compact('existingAdmin', 'newUsername', 'newPassword'));
     }
 }

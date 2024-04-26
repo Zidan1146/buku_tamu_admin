@@ -39,4 +39,8 @@ class LoginAction extends Controller
             return back()->with('error', $th->getMessage());
         }
     }
+
+    public function showLogin(){
+        return view('login.login');
+    }
 }

@@ -4,7 +4,7 @@
         <div class="h-100">
             <div class="sidebar-logo">
                 <a class="navbar-brand fs-5" href="#">
-                    <img src="{{asset('images')}}/ice-cream.png" width="30" height="24" class="d-inline-block align-text-top">
+                    <img src="{{asset('images/admin-profil.png')}}" height="24" class="d-inline-block align-text-top">
                     Admin Buku Tamu
                   </a>
             </div>

@@ -25,7 +25,8 @@ class Admin extends Authenticatable
         "uuid",
         "username",
         "ip",
-        "password"
+        "password",
+        "status"
     ];
 
     protected $hidden = [

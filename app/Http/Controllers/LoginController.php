@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -12,6 +13,8 @@ class LoginController extends Controller
             if(auth('admin')->check()) {
                 return redirect('/admin');
             }
+            
+            Admin::first()->update(['status' => 'inactive']);
             return view('login.login');
         } catch (\Throwable $th) {
             $errorMessage = "

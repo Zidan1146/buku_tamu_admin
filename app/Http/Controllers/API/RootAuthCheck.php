@@ -3,18 +3,21 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Log;
 
 class RootAuthCheck extends Controller
 {
     public function __invoke() {
         try {
-            if(auth('admin')->check()) {
+            if(auth("admin")->check()) {
                 return redirect('/admin');
             }
+
+            Admin::first()->update(['status' => 'inactive']);
             return redirect('/login');
         } catch (\Throwable $th) {
+
             $errorMessage = "
                 {$th->getMessage()}\n
                 On File: {$th->getFile()}\n

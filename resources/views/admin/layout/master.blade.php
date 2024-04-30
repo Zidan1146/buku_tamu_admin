@@ -24,7 +24,7 @@
     @include('admin/layout/content')
 
 
-    {{-- <!-- Logout Modal -->
+    <!-- Logout Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -37,14 +37,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <form action="{{ route('logout') }}" method="POST">
+                    <form action="{{ route('logout.action') }}" method="POST">
                         @csrf
                         <button class="btn btn-danger" type="submit">Logout</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{asset('js')}}/js-admin.js"></script>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         try {
             Schema::table('tbl_admin', function (Blueprint $table) {
-                $table->enum('status', ['active', 'inactive'])->default('active')->after('password');
+                $table->enum('status', ['active', 'inactive'])->default('inactive')->after('password');
             });
         } catch (\Throwable $th) {
             Schema::table('tbl_admin', function (Blueprint $table) {

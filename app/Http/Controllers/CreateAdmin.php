@@ -9,7 +9,19 @@ use Illuminate\Support\Str;
 
 class CreateAdmin extends Controller
 {
-    public function __invoke() {
+    public function __invoke(Request $request) {
+        if(!$request->ip()) {
+            return redirect()->route('login')->with('error', 'You are not allowed to create admin account');
+        }
+
+        if(Admin::count() > 0) {
+            $isIpMatch = Admin::where('ip', $request->ip())->exists();
+
+            if(!$isIpMatch) {
+                return redirect()->route('login')->with('error', 'You are not allowed to create admin account.');
+            }
+        }
+
         $faker = Faker::Create();
         $randomId = Str::random(3);
 

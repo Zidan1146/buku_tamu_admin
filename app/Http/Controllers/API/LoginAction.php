@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 
@@ -22,20 +23,22 @@ class LoginAction extends Controller
                 "username:{$request->username}",
                 5,
                 function () use ($credentials) {
-                    return Auth::guard('admin')->attempt($credentials);
+                    return Auth::guard('admin')->Attempt($credentials);
                 },
-                decaySeconds: 300
+                decaySeconds: 60
             );
 
             if(!$canAttempt) {
-                return back()->withErrors(["error" => "Too many attempts"]);
+                return back()->with(["error" => "Too many attempts"]);
             }
 
             if(!Auth::guard('admin')->attempt($credentials)) {
-                return back()->withErrors(["error" => "username or password are invalid"]);
+                return back()->with(["error" => "username or password are invalid"]);
             }
+            $admin = Admin::where('username', '=', $request->username)->get();
 
-            $request->session()->regenerate();
+            Admin::first()->update(['status' => 'active']);
+            Auth::guard('admin')->login($admin[0]);
 
             return redirect('/admin')->with('success', 'Login Successful');
         } catch (\Throwable $th) {

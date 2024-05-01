@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use App\Models\Log as LogModel;
 
 class LogoutAction extends Controller
 {
@@ -16,6 +15,11 @@ class LogoutAction extends Controller
         $request->session()->invalidate();
 
         Admin::first()->update(['status' => 'inactive']);
+        LogModel::create([
+            'ip' => $request->ip(),
+            'tag' => 'INFO',
+            'message' => 'Admin Logged out'
+        ]);
         return redirect(route("login"));
     }
 }

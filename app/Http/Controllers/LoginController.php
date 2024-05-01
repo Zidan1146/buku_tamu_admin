@@ -3,17 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Log as LogModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
-    public function __invoke(){
+    public function __invoke(Request $request){
         try {
+            LogModel::create([
+                'ip' => $request->ip(),
+                'tag' => 'INFO',
+                'message' => 'Accessed the website'
+            ]);
+
             if(auth('admin')->check()) {
                 return redirect('/admin');
             }
-            
+
             Admin::first()->update(['status' => 'inactive']);
             return view('login.login');
         } catch (\Throwable $th) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Admin;
+use App\Models\Log as LogModel;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 use App\Http\Controllers\Controller;
@@ -19,6 +20,12 @@ class CreateAdmin extends Controller
                 'ip' => $request->ip(),
                 'username' => $request->input('data-username'),
                 'password' => bcrypt($request->input('data-password')),
+            ]);
+
+            LogModel::create([
+                'ip' => $request->ip(),
+                'tag' => 'INFO',
+                'message' => 'New admin created'
             ]);
 
             return redirect('login');

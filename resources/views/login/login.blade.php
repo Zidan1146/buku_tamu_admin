@@ -39,9 +39,8 @@
                 <input id="password" type="password" name="password" class="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring focus:border-blue-300" required>
             </div>
 
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-center">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Login</button>
-                <a href="create-admin" class="text-blue-500 hover:text-blue-700">Create Admin</a>
             </div>
         </form>
     </div>

@@ -15,8 +15,6 @@ Route::get('/', RootAuthCheck::class);
 
 Route::get('/login', LoginController::class)->name('login');
 
-Route::get('/create-admin', ShowCreateAdmin::class);
-
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin/daftar-tamu', [TamuController::class, 'tamu_tampil'])->name('tamu.tampil');

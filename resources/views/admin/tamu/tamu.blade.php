@@ -1,6 +1,16 @@
 @extends('admin.layout.master')
 @section('content')
-    <h1>Daftar Tamu {{ isset($tanggal) ? "Tanggal $tanggal" : '' }}</h1>
+
+    <div class="d-flex justify-content-between">
+        <h1>Daftar Tamu {{ isset($tanggal) ? "Tanggal $tanggal" : '' }}</h1>
+        <form action="" method="GET" class="h-100 d-flex gap-3">
+            <div class="form-floating h-100">
+                <input type="text" name="q" id="q" class="form-control" placeholder="">
+                <label for="q">Search</label>
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
     @if ($guestDates->count() > 1)
         <div class="d-flex justify-content-around my-3">
             @foreach ($guestDates as $date)

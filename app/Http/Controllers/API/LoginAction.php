@@ -20,17 +20,17 @@ class LoginAction extends Controller
                 'message' => 'Attempt To login'
             ]);
 
-            if(!$request->ip()) {
-                return redirect()->route('login')->with('error', 'You are not allowed logged in, unauthorized.');
-            }
+            // if(!$request->ip()) {
+            //     return redirect()->route('login')->with('error', 'You are not allowed logged in, unauthorized.');
+            // }
 
-            if(Admin::count() > 0) {
-                $isIpMatch = Admin::where('ip', $request->ip())->exists();
+            // if(Admin::count() > 0) {
+            //     $isIpMatch = Admin::where('ip', $request->ip())->exists();
 
-                if(!$isIpMatch) {
-                    return redirect()->route('login')->with('error', 'You are not allowed logged in, unauthorized.');
-                }
-            }
+            //     if(!$isIpMatch) {
+            //         return redirect()->route('login')->with('error', 'You are not allowed logged in, unauthorized.');
+            //     }
+            // }
             $request->validate([
                 "username" => "required",
                 "password" => "required"
